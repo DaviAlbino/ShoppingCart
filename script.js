@@ -1,4 +1,4 @@
-const { fetchProducts } = require('./helpers/fetchProducts');
+// const { fetchProducts } = require('./helpers/fetchProducts');
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -30,11 +30,7 @@ const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').inn
 
 const cartItemClickListener = async () => {
   // código
-  const davi = await fetchProducts();
-  console.log(davi);
-  return davi;
 };
-cartItemClickListener();
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
   const li = document.createElement('li');

@@ -7,7 +7,7 @@ describe('1 - Teste a função fetchProducts', () => {
     expect(typeof fetchProducts).toBe('function');
   })
 
-  it('Teste see fetch foi chamada ao executar a função fetchProducts', async () => {
+  it('Teste se fetch foi chamada ao executar a função fetchProducts', async () => {
     await fetchProducts('computador');
 
     expect(fetch).toHaveBeenCalled();
