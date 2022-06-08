@@ -7,14 +7,14 @@ describe('1 - Teste a função fetchProducts', () => {
     expect(typeof fetchProducts).toBe('function');
   })
 
-  it('Teste see fetch foi chamada ao executar a função fetchProducts',  () => {
-    fetchProducts('computador');
+  it('Teste see fetch foi chamada ao executar a função fetchProducts', async () => {
+    await fetchProducts('computador');
 
     expect(fetch).toHaveBeenCalled();
   })
 
-  it('Teste se ao utilizar a função com o argumento "computador" a função fetch irá usar como referência a URL correta', () => {
-    fetchProducts('computador');
+  it('Teste se ao utilizar a função com o argumento "computador" a função fetch irá usar como referência a URL correta', async () => {
+    await fetchProducts('computador');
 
     expect(fetch).toHaveBeenCalledWith('https://api.mercadolibre.com/sites/MLB/search?q=computador')
   } )
