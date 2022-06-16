@@ -57,4 +57,6 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
 
 window.onload = () => { 
    getProductItems();
+   getSkuFromProductItem();
+   createCartItemElement();
  };
