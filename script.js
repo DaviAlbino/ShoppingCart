@@ -41,19 +41,19 @@ async function getProductItems() {
   });
 }
 
-// const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
+const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-// const cartItemClickListener = async () => {
-//   // código
-// };
+const cartItemClickListener = async () => {
+  // código
+};
 
-// const createCartItemElement = ({ sku, name, salePrice }) => {
-//   const li = document.createElement('li');
-//   li.className = 'cart__item';
-//   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-//   li.addEventListener('click', cartItemClickListener);
-//   return li;
-// };
+const createCartItemElement = ({ sku, name, salePrice }) => {
+  const li = document.createElement('li');
+  li.className = 'cart__item';
+  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.addEventListener('click', cartItemClickListener);
+  return li;
+};
 
 window.onload = () => { 
    getProductItems();
