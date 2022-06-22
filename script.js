@@ -1,5 +1,7 @@
 // const { fetchProducts } = require('./helpers/fetchProducts');
 
+// const { fetchItem } = require("./helpers/fetchItem");
+
 // const { fetchProducts } = require('./helpers/fetchProducts');
 
 // const item = require('./mocks/item');
@@ -43,8 +45,8 @@ async function getProductItems() {
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-const cartItemClickListener = async () => {
-  // código
+const cartItemClickListener = (event) => {
+  event.target.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -55,6 +57,19 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
+const newCartItem = async () => {
+  await getProductItems();
+  const addCartButton = document.querySelectorAll('.item__add');
+  const ol = document.querySelector('.cart__items');
+  addCartButton.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const data = await fetchItem(getSkuFromProductItem(button.parentNode));
+      const { id, title, price } = data;
+      ol.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
+    });
+  });
+};
+
 window.onload = () => { 
-   getProductItems();
+   newCartItem();
  };
