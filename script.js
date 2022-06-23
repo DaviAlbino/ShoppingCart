@@ -79,8 +79,17 @@ const getli = () => {
     item.addEventListener('click', cartItemClickListener);
   });
 };
+
+const deleteAllItemsCart = () => {
+  const emptyButton = document.querySelector('.empty-cart');
+  emptyButton.addEventListener('click', () => {
+    const li = document.querySelectorAll('.cart__item');
+    li.forEach((item) => item.remove());
+  });
+};
 window.onload = () => { 
   newCartItem();
   getSavedCartItems();
   getli();
+  deleteAllItemsCart();
 };
