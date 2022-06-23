@@ -47,6 +47,7 @@ const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').inn
 
 const cartItemClickListener = (event) => {
   event.target.remove();
+  saveCartItems();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -54,11 +55,13 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
+  saveCartItems();
   return li;
 };
 
 const newCartItem = async () => {
   await getProductItems();
+  getSavedCartItems();
   const addCartButton = document.querySelectorAll('.item__add');
   const ol = document.querySelector('.cart__items');
   addCartButton.forEach((button) => {
