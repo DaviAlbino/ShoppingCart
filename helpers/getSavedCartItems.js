@@ -6,7 +6,7 @@ const getSavedCartItems = () => {
       const li = document.createElement('li');
       li.className = 'cart__item';
       li.innerText = saved;
-      li.addEventListener('click', cartItemClickListener);
+      // li.addEventListener('click', cartItemClickListener);
       ol.appendChild(li);
     });
   }
