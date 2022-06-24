@@ -33,9 +33,25 @@ const createProductItemElement = ({ sku, name, image }) => {
   return section;
 };
 
+const showLoading = () => {
+  const loading = document.createElement('p');
+  loading.className = 'loading';
+  loading.innerHTML = 'carregando...';
+  return loading;
+};
+
+// const fadeLoading = () => {
+//   const loading = document.createElement('p');
+//   loading.className = 'loading';
+//   loading.innerHTML = 'carregando...';
+//   return loading.remove();
+// };
+
 async function getProductItems() {
-  const results = await fetchProducts('computador');
   const sectionItems = document.querySelector('.items');
+  const getLoandingOnScreen = sectionItems.appendChild(showLoading());
+  const results = await fetchProducts('computador');
+  getLoandingOnScreen.remove();
   return results.map((pc) => { 
     const { id, title, thumbnail } = pc;
     return sectionItems
