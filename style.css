@@ -149,7 +149,11 @@ body {
 }
 
 .cart__item {
-  padding: 6px;
+  margin: 10px;
+  padding: 9px;
+  background-color: rgb(165, 236, 165);
+  border-radius: 9px;
+  box-shadow: rgba(50, 50, 93, 0.25) 1px 50px 100px -20px, rgba(0, 0, 0, 0.3) 1px 30px 60px -30px, rgba(10, 37, 64, 0.35) 1px -2px 6px 1px inset;
 }
 
 .loading {

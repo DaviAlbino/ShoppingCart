@@ -7,6 +7,8 @@
 // const item = require('./mocks/item');
 // const { results } = require('./mocks/search');
 
+const ol = document.querySelector('.cart__items');
+
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -62,9 +64,8 @@ async function getProductItems() {
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
 const cartItemClickListener = (event) => {
-  const ol = document.querySelector('.cart__items');
   event.target.remove();
-  saveCartItems(ol.innerHTML);
+  // saveCartItems(ol.innerHTML);
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -72,23 +73,34 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
-  // saveCartItems(ol.innerHTML);
   return li;
+};
+
+// const showTotalPrice = (salePrice, cartElement) => {  
+  
+// };
+
+const getPrice = (salePrice, cartElement) => {
+  const totalDiv = document.createElement('div');
+  totalDiv.className = 'total-price';
+  totalDiv.innerText = `${salePrice}`;
+  cartElement.appendChild(totalDiv);
 };
 
 const newCartItem = async () => {
   await getProductItems();
   const addCartButton = document.querySelectorAll('.item__add');
-  const ol = document.querySelector('.cart__items');
   addCartButton.forEach((button) => {
     button.addEventListener('click', async () => {
       const data = await fetchItem(getSkuFromProductItem(button.parentNode));
       const { id, title, price } = data;
       ol.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
-      saveCartItems(ol.innerHTML);
+      saveCartItems(data);
+      getPrice(price, ol);
     });
   });
 };
+
 const getli = () => { 
   const li = document.querySelectorAll('.cart__item');
   li.forEach((item) => {
@@ -99,13 +111,22 @@ const getli = () => {
 const deleteAllItemsCart = () => {
   const emptyButton = document.querySelector('.empty-cart');
   emptyButton.addEventListener('click', () => {
-    const li = document.querySelectorAll('.cart__item');
-    li.forEach((item) => item.remove());
+    ol.childNodes.forEach((item) => item.remove());
+    saveCartItems(data);
   });
 };
+
+const showSavedCartItems = () => {
+  const savedItemsObject = getSavedCartItems();
+  savedItemsObject.forEach((item) => {
+    const { id, title, price } = item;
+    ol.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
+  });
+};
+
 window.onload = () => { 
   newCartItem();
-  getSavedCartItems();
   getli();
+  showSavedCartItems();
   deleteAllItemsCart();
 };
